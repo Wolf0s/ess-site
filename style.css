@@ -1,5 +1,4 @@
-
-
+/* Reset e estrutura básica */
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +11,10 @@ body {
   color: #333;
   line-height: 1.6;
   height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 header {
@@ -32,10 +35,18 @@ header {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .logo {
   height: 60px;
+  cursor: pointer; /* NOVO: deixa claro que é clicável */
+}
+
+/* NAV GERAL */
+nav {
+  display: flex;
+  align-items: center;
 }
 
 nav ul {
@@ -55,6 +66,48 @@ nav a:hover {
   color: #e60000;
 }
 
+/* Botão hambúrguer */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  padding-left: 1rem;
+}
+
+/* Menu mobile aberto */
+nav.open ul {
+  display: flex !important;
+  flex-direction: column;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+    background-color: #002f4b;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    display: none;
+    text-align: center;
+    padding: 1rem 0;
+    z-index: 999;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* Seções principais */
 .lg {
   height: 250px;
 }
@@ -194,7 +247,7 @@ footer {
 .mvv-section ul li {
   list-style: none;
   position: relative;
-  padding-left: 24px; /* Menor espaço entre ícone e texto */
+  padding-left: 24px;
   margin-bottom: 10px;
   font-size: 1.1rem;
   line-height: 1.4;
@@ -285,19 +338,6 @@ p {
   justify-content: center;
 }
 
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
@@ -320,10 +360,6 @@ p {
   height: 30px;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 #trabalhe_conosco {
-  min-height: calc(100vh - 150px);
+  min-height: calc(100vh - 150px);
 }
