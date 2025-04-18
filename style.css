@@ -5,18 +5,22 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
   color: #333;
   line-height: 1.6;
-  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* Header */
 header {
   background-color: #002f4b;
   color: white;
@@ -25,7 +29,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100%; /* Garante que o header ocupe toda a largura */
+  width: 100%;
 }
 
 .head {
@@ -40,9 +44,9 @@ header {
 
 .logo {
   height: 60px;
-  cursor: pointer;
 }
 
+/* NAV */
 nav ul {
   list-style: none;
   display: flex;
@@ -70,6 +74,7 @@ nav a:hover {
   right: 0;
 }
 
+/* Menu ativo no mobile */
 #nav-menu ul.active {
   display: flex !important;
 }
@@ -78,10 +83,6 @@ nav a:hover {
 @media (max-width: 768px) {
   .hamburger {
     display: block;
-  }
-
-  #nav-menu {
-    width: 100%;
   }
 
   #nav-menu ul {
@@ -95,40 +96,36 @@ nav a:hover {
     text-align: center;
     padding: 1rem 0;
     z-index: 999;
+    width: 100%;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   nav ul {
     flex-direction: column;
     gap: 1rem;
   }
-
-  .container,
-  .sobre,
-  .secao,
-  .trabalhe-conosco {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Certificando-se de que o conteúdo está centralizado */
-  .secao,
-  .sobre,
-  .trabalhe-conosco {
-    padding: 2rem;
-    max-width: 100%; /* Garante que o conteúdo ocupe toda a largura */
-  }
 }
 
 /* Seções principais */
 .lg {
-  height: 250px;
+  width: 100%;
+  max-height: 400px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
-.sobre,
-.secao {
+.sobre, .secao, .trabalhe-conosco, .mvv-section {
   padding: 4rem 2rem;
   text-align: center;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .secao {
@@ -143,6 +140,7 @@ nav a:hover {
   padding: 40px 0;
 }
 
+/* Cards */
 .card {
   background: white;
   border: 1px solid #ddd;
@@ -152,10 +150,8 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  position: relative;
-  transition: transform 0.3s;
   text-align: center;
+  transition: transform 0.3s;
   min-height: 470px;
 }
 
@@ -171,16 +167,6 @@ nav a:hover {
   margin-bottom: 10px;
 }
 
-.icon {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
-.card h3 {
-  margin-top: 0;
-  color: #003366;
-}
-
 .contact-buttons {
   display: none;
   margin-top: 15px;
@@ -192,6 +178,7 @@ nav a:hover {
   display: flex;
 }
 
+/* Botões */
 .btn {
   padding: 10px;
   text-align: center;
@@ -212,19 +199,15 @@ nav a:hover {
 footer {
   display: flex;
   justify-content: center;
-  position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100%; /* Garante que o footer ocupe toda a largura */
   background: #002f4b;
   color: white;
   padding: 10px 0;
+  width: 100%;
 }
 
+/* Seções com animação */
 .mvv-section {
   background-color: #ffffff;
-  padding: 60px 20px;
-  text-align: center;
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.6s ease;
@@ -241,16 +224,16 @@ footer {
   margin-bottom: 15px;
 }
 
-.mvv-section p {
+.mvv-section p,
+.mvv-section ul li {
   font-size: 1.1rem;
   color: #444;
   max-width: 800px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 10px auto;
   line-height: 1.6;
 }
 
 .mvv-section ul {
-  list-style: none;
   padding: 0;
   margin: 0 auto;
   max-width: 600px;
@@ -260,9 +243,6 @@ footer {
   list-style: none;
   position: relative;
   padding-left: 24px;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  line-height: 1.4;
   display: flex;
   align-items: center;
 }
@@ -272,28 +252,9 @@ footer {
   position: absolute;
   left: 0;
   font-size: 1rem;
-  top: 0.1rem;
 }
 
-.trabalhe-conosco {
-  padding: 4rem 2rem;
-  text-align: center;
-  background-color: #ffffff;
-}
-
-.trabalhe-conosco h2 {
-  color: #002f4b;
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-}
-
-.trabalhe-conosco p {
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto 20px auto;
-  color: #333;
-}
-
+/* Trabalhe conosco */
 .trabalhe-conosco .contact-buttons {
   display: flex;
   justify-content: center;
@@ -305,22 +266,16 @@ footer {
   padding: 14px 24px;
   font-size: 1.1rem;
   border-radius: 30px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-block;
   min-width: 220px;
+  transition: all 0.3s ease;
 }
 
 .trabalhe-conosco .btn.email {
   background: linear-gradient(45deg, #007bff, #0056b3);
-  border: none;
-  color: #fff;
 }
 
 .trabalhe-conosco .btn.whatsapp {
   background: linear-gradient(45deg, #25d366, #128c7e);
-  border: none;
-  color: #fff;
 }
 
 .trabalhe-conosco .btn:hover {
@@ -328,28 +283,7 @@ footer {
   transform: scale(1.05);
 }
 
-.hidden {
-  display: none !important;
-}
-
-h2 {
-  color: #ffffff;
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: 1.1rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
+/* Botão flutuante do WhatsApp */
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
@@ -361,6 +295,7 @@ p {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   z-index: 1000;
   transition: background 0.3s;
+  max-width: calc(100% - 40px);
 }
 
 .whatsapp-float:hover {
@@ -370,6 +305,29 @@ p {
 .whatsapp-float img {
   width: 30px;
   height: 30px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
+
+h2 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 #trabalhe_conosco {
