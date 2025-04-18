@@ -25,6 +25,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
 }
 
 .head {
@@ -34,19 +35,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   position: relative;
 }
 
 .logo {
   height: 60px;
-  cursor: pointer; /* NOVO: deixa claro que é clicável */
-}
-
-/* NAV GERAL */
-nav {
-  display: flex;
-  align-items: center;
+  cursor: pointer;
 }
 
 nav ul {
@@ -72,13 +66,12 @@ nav a:hover {
   font-size: 2rem;
   color: white;
   cursor: pointer;
-  padding-left: 1rem;
+  position: absolute;
+  right: 0;
 }
 
-/* Menu mobile aberto */
-nav.open ul {
+#nav-menu ul.active {
   display: flex !important;
-  flex-direction: column;
 }
 
 /* Responsivo */
@@ -87,7 +80,11 @@ nav.open ul {
     display: block;
   }
 
-  nav ul {
+  #nav-menu {
+    width: 100%;
+  }
+
+  #nav-menu ul {
     flex-direction: column;
     background-color: #002f4b;
     position: absolute;
@@ -100,8 +97,15 @@ nav.open ul {
     z-index: 999;
   }
 
-  .container {
+  nav ul {
     flex-direction: column;
+    gap: 1rem;
+  }
+
+  .container,
+  .sobre,
+  .secao,
+  .trabalhe-conosco {
     align-items: center;
     text-align: center;
   }
@@ -112,14 +116,13 @@ nav.open ul {
   height: 250px;
 }
 
-.sobre {
+.sobre,
+.secao {
   padding: 4rem 2rem;
   text-align: center;
 }
 
 .secao {
-  padding: 4rem 2rem;
-  text-align: center;
   color: white;
 }
 
