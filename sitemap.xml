@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Página inicial -->
   <url>
     <loc>https://wolf0s.github.io/ess-site/</loc>
     <lastmod>2025-04-17</lastmod>
     <priority>1.00</priority>
   </url>
 
+  <!-- Seções do site -->
+  <url>
+    <loc>https://wolf0s.github.io/ess-site/#empresa</loc>
+    <lastmod>2025-04-17</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://wolf0s.github.io/ess-site/#servicos</loc>
+    <lastmod>2025-04-17</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://wolf0s.github.io/ess-site/#contato</loc>
+    <lastmod>2025-04-17</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://wolf0s.github.io/ess-site/#missao</loc>
+    <lastmod>2025-04-17</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://wolf0s.github.io/ess-site/#visao</loc>
+    <lastmod>2025-04-17</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://wolf0s.github.io/ess-site/#valores</loc>
+    <lastmod>2025-04-17</lastmod>
+    <priority>0.80</priority>
+  </url>
   <url>
     <loc>https://wolf0s.github.io/ess-site/#trabalhe_conosco</loc>
+    <lastmod>2025-04-17</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Contato -->
+  <url>
+    <loc>https://wolf0s.github.io/ess-site/#contato</loc>
     <lastmod>2025-04-17</lastmod>
     <priority>0.80</priority>
   </url>
