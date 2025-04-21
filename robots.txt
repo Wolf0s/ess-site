@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://essservicos.com.br/sitemap.xml
