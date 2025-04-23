@@ -1,52 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://essservicos.com.br/</loc>
     <lastmod>2025-04-21</lastmod>
     <priority>1.00</priority>
   </url>
-
-  <url>
-    <loc>https://essservicos.com.br/#empresa</loc>
-    <lastmod>2025-04-21</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://essservicos.com.br/#servicos</loc>
-    <lastmod>2025-04-21</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://essservicos.com.br/#contato</loc>
-    <lastmod>2025-04-21</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://essservicos.com.br/#missao</loc>
-    <lastmod>2025-04-21</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://essservicos.com.br/#visao</loc>
-    <lastmod>2025-04-21</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://essservicos.com.br/#valores</loc>
-    <lastmod>2025-04-21</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://essservicos.com.br/#trabalhe_conosco</loc>
-    <lastmod>2025-04-21</lastmod>
-    <priority>0.70</priority>
-  </url>
-
 </urlset>
