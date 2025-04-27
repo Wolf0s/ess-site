@@ -96,7 +96,11 @@ nav a:hover {
 @media (max-width: 768px) {
     .favicon {
     height: 40px;
+    width: auto;
+    max-width: 150px;
   }
+
+  
 
   .hamburger {
     display: block;
