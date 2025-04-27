@@ -255,22 +255,24 @@ footer {
   padding: 0;
   margin: 0 auto;
   max-width: 600px;
+  text-align: left;
 }
 
 .mvv-section ul li {
   list-style: none;
-  position: relative;
-  padding-left: 24px;
   display: flex;
   align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 1.1rem;
 }
 
 .mvv-section ul li::before {
   content: "✅";
-  position: absolute;
-  left: 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
+
+
 
 /* Trabalhe conosco */
 .trabalhe-conosco .contact-buttons {
