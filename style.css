@@ -55,7 +55,7 @@ header {
   position: relative;
 }
 
-.favicon {
+.logo {
   height: 60px;
 }
 
@@ -94,14 +94,11 @@ nav a:hover {
 
 /* Responsivo */
 @media (max-width: 768px) {
-    .favicon {
+
+  .favicon {
     height: 40px;
-    width: auto;
-    max-width: 150px;
+    max-width: 100%;
   }
-
-  
-
   .hamburger {
     display: block;
   }
