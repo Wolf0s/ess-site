@@ -1,36 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
   const linkTrabalhe = document.querySelector('a[href="#trabalhe_conosco"]');
-  const secaoTrabalhe = document.getElementById('trabalhe_conosco');
-  const conteudoPrincipal = document.getElementById('conteudo-principal');
+  const secaoTrabalhe = document.getElementById("trabalhe_conosco");
+  const conteudoPrincipal = document.getElementById("conteudo-principal");
   const logo = document.querySelector(".logo");
   const hamburger = document.querySelector(".hamburger");
   const navMenu = document.querySelector("#nav-menu ul");
 
   // Ao clicar em "Trabalhe Conosco"
-  linkTrabalhe.addEventListener('click', (e) => {
+  linkTrabalhe.addEventListener("click", (e) => {
     e.preventDefault();
-    conteudoPrincipal.classList.add('hidden');
-    secaoTrabalhe.classList.remove('hidden');
-    secaoTrabalhe.scrollIntoView({ behavior: 'smooth' });
-    if (navMenu.classList.contains("active")) navMenu.classList.remove("active");
+    conteudoPrincipal.classList.add("hidden");
+    secaoTrabalhe.classList.remove("hidden");
+    secaoTrabalhe.scrollIntoView({ behavior: "smooth" });
+    if (navMenu.classList.contains("active"))
+      navMenu.classList.remove("active");
   });
 
   // Ao clicar em outros links, volta ao conteúdo principal
-  const outrosLinks = document.querySelectorAll('nav a:not([href="#trabalhe_conosco"])');
-  outrosLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      conteudoPrincipal.classList.remove('hidden');
-      secaoTrabalhe.classList.add('hidden');
-      if (navMenu.classList.contains("active")) navMenu.classList.remove("active");
+  const outrosLinks = document.querySelectorAll(
+    'nav a:not([href="#trabalhe_conosco"])'
+  );
+  outrosLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      conteudoPrincipal.classList.remove("hidden");
+      secaoTrabalhe.classList.add("hidden");
+      if (navMenu.classList.contains("active"))
+        navMenu.classList.remove("active");
     });
   });
 
   // Clique na logo leva à home
-  logo.addEventListener('click', () => {
-    conteudoPrincipal.classList.remove('hidden');
-    secaoTrabalhe.classList.add('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (navMenu.classList.contains("active")) navMenu.classList.remove("active");
+  logo.addEventListener("click", () => {
+    conteudoPrincipal.classList.remove("hidden");
+    secaoTrabalhe.classList.add("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (navMenu.classList.contains("active"))
+      navMenu.classList.remove("active");
   });
 
   // Menu responsivo mobile
@@ -54,5 +59,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll(); // Garante animação se já estiver visível ao carregar
+  revealOnScroll(); // Garante animação se já estiver visível ao carregar
+
+  // === EXPANDER "SABER MAIS" ===
+  document.querySelectorAll('.card .read-more').forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".card");
+      const expanded = card.classList.toggle("expanded");
+      btn.setAttribute("aria-expanded", expanded);
+      btn.textContent = expanded ? "Mostrar menos" : "Saber mais";
+    });
+  });
 });
