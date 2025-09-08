@@ -1,3 +1,4 @@
+
 /* Reset e estrutura básica */
 * {
   margin: 0;
@@ -22,7 +23,6 @@ html {
   white-space: nowrap;
   border: 0;
 }
-
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -94,11 +94,11 @@ nav a:hover {
 
 /* Responsivo */
 @media (max-width: 768px) {
-
   .favicon {
     height: 40px;
     max-width: 100%;
   }
+
   .hamburger {
     display: block;
   }
@@ -272,8 +272,6 @@ footer {
   font-size: 1.1rem;
 }
 
-
-
 /* Trabalhe conosco */
 .trabalhe-conosco .contact-buttons {
   display: flex;
@@ -352,4 +350,40 @@ p {
 
 #trabalhe_conosco {
   min-height: calc(100vh - 150px);
+}
+
+/* === EXPANDER (SABER MAIS) === */
+/* Limita a 5 linhas no parágrafo do card */
+.clamp-5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Quando o card estiver expandido, mostra o texto completo */
+.card.expanded .clamp-5 {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+/* Botão "Saber mais" */
+.read-more {
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  text-decoration: underline;
+  color: #002f4b; /* combina com a identidade */
+}
+
+.read-more:focus {
+  outline: 2px solid #c9a72a;
+  outline-offset: 2px;
+}
+
+/* Dar um respiro quando houver o botão */
+.card .read-more + .contact-buttons {
+  margin-top: 12px;
 }
