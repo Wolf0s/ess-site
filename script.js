@@ -1,69 +1,98 @@
+// ESS Serviços — comportamento da página
+// Número do WhatsApp em um lugar só para o formulário (os links fixos estão no HTML).
+const WHATSAPP = "5511945454335";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const linkTrabalhe = document.querySelector('a[href="#trabalhe_conosco"]');
-  const secaoTrabalhe = document.getElementById("trabalhe_conosco");
-  const conteudoPrincipal = document.getElementById("conteudo-principal");
-  const logo = document.querySelector(".logo");
-  const hamburger = document.querySelector(".hamburger");
-  const navMenu = document.querySelector("#nav-menu ul");
+  // ---------- Menu mobile ----------
+  const menuBtn = document.querySelector(".menu-btn");
+  const menu = document.getElementById("menu");
 
-  // "Trabalhe Conosco"
-  if (linkTrabalhe && secaoTrabalhe && conteudoPrincipal) {
-    linkTrabalhe.addEventListener("click", (e) => {
-      e.preventDefault();
-      conteudoPrincipal.classList.add("hidden");
-      secaoTrabalhe.classList.remove("hidden");
-      secaoTrabalhe.scrollIntoView({ behavior: "smooth" });
-      if (navMenu && navMenu.classList.contains("active")) navMenu.classList.remove("active");
-    });
-  }
+  const fecharMenu = () => {
+    menu.classList.remove("aberto");
+    menuBtn.setAttribute("aria-expanded", "false");
+  };
 
-  // Outros links voltam pro conteúdo principal
-  document.querySelectorAll('nav a:not([href="#trabalhe_conosco"])').forEach((link) => {
-    link.addEventListener("click", () => {
-      if (!conteudoPrincipal || !secaoTrabalhe) return;
-      conteudoPrincipal.classList.remove("hidden");
-      secaoTrabalhe.classList.add("hidden");
-      if (navMenu && navMenu.classList.contains("active")) navMenu.classList.remove("active");
+  menuBtn.addEventListener("click", () => {
+    const aberto = menu.classList.toggle("aberto");
+    menuBtn.setAttribute("aria-expanded", String(aberto));
+  });
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", fecharMenu));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu.classList.contains("aberto")) {
+      fecharMenu();
+      menuBtn.focus();
+    }
+  });
+
+  // ---------- Formulário de orçamento -> WhatsApp ----------
+  const form = document.getElementById("orcamento");
+  const erro = document.getElementById("orcamento-erro");
+  const nome = form.elements.nome;
+
+  const mostrarErro = (msg) => {
+    erro.textContent = msg;
+    erro.hidden = false;
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    erro.hidden = true;
+    nome.removeAttribute("aria-invalid");
+
+    const servicos = [...form.querySelectorAll('input[name="servico"]:checked')].map((i) => i.value);
+    const nomeVal = nome.value.trim();
+    const local = form.elements.local.value.trim();
+    const detalhes = form.elements.detalhes.value.trim();
+
+    if (!nomeVal) {
+      nome.setAttribute("aria-invalid", "true");
+      mostrarErro("Escreva seu nome para enviarmos o pedido.");
+      nome.focus();
+      return;
+    }
+    if (servicos.length === 0) {
+      mostrarErro("Escolha pelo menos um serviço.");
+      form.querySelector('input[name="servico"]').focus();
+      return;
+    }
+
+    const linhas = [
+      `Olá! Meu nome é ${nomeVal} e gostaria de um orçamento.`,
+      `Serviço: ${servicos.join(", ")}`,
+    ];
+    if (local) linhas.push(`Local: ${local}`);
+    if (detalhes) linhas.push(`Detalhes: ${detalhes}`);
+
+    const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(linhas.join("\n"))}`;
+    const janela = window.open(url, "_blank");
+    if (janela) janela.opener = null;
+    else window.location.href = url; // bloqueador de pop-up: abre na mesma aba
+  });
+
+  // ---------- "Pedir orçamento de X" nos serviços ----------
+  document.querySelectorAll(".servico__link").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const valor = btn.dataset.servico;
+      form.querySelectorAll('input[name="servico"]').forEach((i) => {
+        if (i.value === valor) i.checked = true;
+      });
+      form.scrollIntoView({ behavior: "smooth", block: "center" });
+      form.classList.remove("pulsar");
+      void form.offsetWidth; // reinicia a animação
+      form.classList.add("pulsar");
+      setTimeout(() => nome.focus({ preventScroll: true }), 500);
     });
   });
 
-  // Logo -> home
-  if (logo && secaoTrabalhe && conteudoPrincipal) {
-    logo.addEventListener("click", () => {
-      conteudoPrincipal.classList.remove("hidden");
-      secaoTrabalhe.classList.add("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      if (navMenu && navMenu.classList.contains("active")) navMenu.classList.remove("active");
-    });
+  // ---------- Esconde o botão flutuante enquanto o formulário está na tela ----------
+  const flutuante = document.querySelector(".whats-flutuante");
+  if (flutuante && "IntersectionObserver" in window) {
+    new IntersectionObserver(([entrada]) => {
+      flutuante.classList.toggle("escondido", entrada.isIntersecting);
+    }, { threshold: 0.15 }).observe(form);
   }
 
-  // Menu mobile
-  if (hamburger && navMenu) {
-    hamburger.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-    });
-  }
-
-  // Animação ao rolar
-  function revealOnScroll() {
-    document.querySelectorAll(".mvv-section").forEach((section) => {
-      const windowHeight = window.innerHeight;
-      const elementTop = section.getBoundingClientRect().top;
-      const visibilityThreshold = 100;
-      if (elementTop < windowHeight - visibilityThreshold) section.classList.add("active");
-    });
-  }
-  window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll();
-
-  // === EXPANDER "SABER MAIS" ===
-  document.querySelectorAll(".card .read-more").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const card = e.currentTarget.closest(".card");
-      if (!card) return;
-      const expanded = card.classList.toggle("expanded");
-      e.currentTarget.setAttribute("aria-expanded", expanded ? "true" : "false");
-      e.currentTarget.textContent = expanded ? "Mostrar menos" : "Saber mais";
-    });
-  });
+  // ---------- Ano no rodapé ----------
+  const ano = document.getElementById("ano");
+  if (ano) ano.textContent = new Date().getFullYear();
 });
