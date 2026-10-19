@@ -374,6 +374,134 @@ a { color: inherit; }
   100% { box-shadow: 0 0 0 18px rgba(179, 20, 28, 0); }
 }
 
+/* =========================================================
+   Animações
+   ========================================================= */
+
+/* ---------- Entrada da página ---------- */
+@keyframes subir {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes entrar-direita {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes descer {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: none; }
+}
+.topo { animation: descer .6s cubic-bezier(.2, .8, .2, 1) both; }
+.hero__texto > * { animation: subir .8s cubic-bezier(.2, .8, .2, 1) both; }
+.hero h1 { animation-delay: .15s; }
+.hero__lead { animation-delay: .3s; }
+.hero__lista { animation-delay: .45s; }
+.orcamento { animation: entrar-direita .9s .35s cubic-bezier(.2, .8, .2, 1) both; }
+.orcamento.pulsar { animation: pulsar .9s ease; }
+
+/* Sombra no topo quando a página rola */
+.topo { transition: box-shadow .25s ease; }
+.topo.rolou { box-shadow: 0 6px 20px rgba(0, 38, 61, .12); }
+
+/* ---------- Revelar ao rolar (ativado pelo script.js) ---------- */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1);
+}
+.js-reveal .reveal.is-in { opacity: 1; transform: none; }
+
+/* Fotos dos serviços abrem como uma cortina */
+.js-reveal .servico.reveal img {
+  clip-path: inset(0 100% 0 0 round var(--raio));
+  transition: clip-path 1.1s cubic-bezier(.7, 0, .2, 1) .15s;
+}
+.js-reveal .servico.reveal.is-in img { clip-path: inset(0 0 0 0 round var(--raio)); }
+
+/* Barrinha vermelha sob os títulos de seção */
+.secao__titulo::after {
+  content: "";
+  display: block;
+  width: 56px; height: 4px;
+  margin-top: 12px;
+  background: var(--vermelho);
+  border-radius: 2px;
+  transform-origin: left;
+  transition: transform .7s cubic-bezier(.2, .8, .2, 1) .35s;
+}
+.js-reveal .secao__titulo.reveal:not(.is-in)::after { transform: scaleX(0); }
+
+/* ---------- Hover em tudo que é clicável ---------- */
+
+/* Menu: sublinhado vermelho que cresce da esquerda */
+@media (min-width: 861px) {
+  .menu a:not(.menu__cta) {
+    position: relative;
+    border-bottom-color: transparent !important;
+    transition: color .2s ease;
+  }
+  .menu a:not(.menu__cta)::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 2px;
+    background: var(--vermelho);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .menu a:not(.menu__cta):hover { color: var(--vermelho); }
+  .menu a:not(.menu__cta):hover::after,
+  .menu a:not(.menu__cta):focus-visible::after { transform: scaleX(1); }
+}
+.menu .menu__cta { transition: background .2s ease, transform .2s ease, box-shadow .2s ease; }
+.menu .menu__cta:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0, 38, 61, .25); }
+
+/* Botões: sobem um pouco e ganham sombra */
+.btn { transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0, 0, 0, .18); }
+.btn:active { transform: translateY(0); box-shadow: none; }
+.btn svg { transition: transform .3s ease; }
+.btn:hover svg { transform: rotate(-12deg) scale(1.12); }
+
+/* "Pedir orçamento de…": seta que anda */
+.servico__link { transition: color .2s ease; }
+.servico__link::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 6px;
+  text-decoration: none;
+  transition: transform .25s ease;
+}
+.servico__link:hover::after { transform: translateX(6px); }
+
+/* Chips do formulário */
+.chip span { transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease; }
+.chip:hover span { transform: translateY(-2px); }
+
+/* Campos do formulário */
+.campo input, .campo textarea { transition: border-color .2s ease, box-shadow .2s ease; }
+.campo input:hover, .campo textarea:hover { border-color: #9fb4c3; }
+
+/* Rodapé */
+.rodape__dados a { transition: color .2s ease; }
+.rodape__dados a:hover { color: #ff9aa0; }
+
+/* WhatsApp flutuante: onda chamando atenção + cresce no hover */
+.whats-flutuante { transition: opacity .2s ease, transform .2s ease, background .2s ease; }
+.whats-flutuante::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: var(--whats);
+  z-index: -1;
+  animation: onda 2.8s ease-out infinite;
+}
+@keyframes onda {
+  0%        { transform: scale(1);   opacity: .55; }
+  70%, 100% { transform: scale(1.7); opacity: 0; }
+}
+.whats-flutuante:hover { transform: scale(1.08); }
+
 /* ================= Responsivo ================= */
 @media (max-width: 900px) {
   .hero__inner, .sobre__inner { grid-template-columns: 1fr; }

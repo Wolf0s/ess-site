@@ -92,6 +92,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.15 }).observe(form);
   }
 
+  // ---------- Sombra no topo ao rolar ----------
+  const topo = document.querySelector(".topo");
+  const marcarTopo = () => topo.classList.toggle("rolou", window.scrollY > 8);
+  marcarTopo();
+  window.addEventListener("scroll", marcarTopo, { passive: true });
+
+  // ---------- Revelar elementos conforme a página rola ----------
+  const reduzMovimento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduzMovimento && "IntersectionObserver" in window) {
+    const alvos = document.querySelectorAll(
+      ".secao__titulo, .servico, .sobre__intro p, .mvv__item, .trabalhe__inner > *, .rodape__inner > *"
+    );
+    document.documentElement.classList.add("js-reveal");
+
+    alvos.forEach((el) => {
+      el.classList.add("reveal");
+      // Itens lado a lado entram em cascata
+      const irmaos = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
+      const ordem = Math.min(irmaos.indexOf(el), 4);
+      if (ordem > 0) el.style.transitionDelay = `${ordem * 0.12}s`;
+    });
+
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        const el = entrada.target;
+        el.classList.add("is-in");
+        observador.unobserve(el);
+        setTimeout(() => { el.style.transitionDelay = ""; }, 1400);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+
+    alvos.forEach((el) => observador.observe(el));
+  }
+
   // ---------- Ano no rodapé ----------
   const ano = document.getElementById("ano");
   if (ano) ano.textContent = new Date().getFullYear();
